@@ -2,39 +2,44 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private bool isDragging = false;
+    public float moveSpeed = 5f; 
+
+    private Vector3 targetPosition;
+    private bool isMoving = false;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider != null && hit.collider.gameObject == gameObject)
-                {
-                    isDragging = true;
-                }
-            }
+            SetTargetPosition();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (isMoving)
         {
-            isDragging = false;
+            MoveToTargetPosition();
         }
+    }
 
-       
-        if (isDragging)
+    void SetTargetPosition()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.nearClipPlane;
+        targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        targetPosition.y = transform.position.y; 
+        targetPosition.z = transform.position.z; 
+
+        isMoving = true;
+    }
+
+    void MoveToTargetPosition()
+    {
+        float step = moveSpeed * Time.deltaTime; // Calculer le pas en fonction de la vitesse et du temps écoulé
+        transform.position = Vector3.Lerp(transform.position, targetPosition, step);
+
+        // Arrêter le mouvement une fois la position atteinte
+        if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Vector3 newPos = new Vector3(hit.point.x, transform.position.y, transform.position.z);
-                transform.position = newPos;
-            }
+            transform.position = targetPosition;
+            isMoving = false;
         }
     }
 }

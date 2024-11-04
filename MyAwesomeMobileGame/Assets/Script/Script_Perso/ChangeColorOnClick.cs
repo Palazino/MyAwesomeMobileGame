@@ -6,7 +6,7 @@ public class ChangeColorOnClick : MonoBehaviour
 {
     private Color defaultColor;
     private Renderer rend;
-    private bool isDragging = false;
+    private bool isDragging;
 
     void Start()
     {
