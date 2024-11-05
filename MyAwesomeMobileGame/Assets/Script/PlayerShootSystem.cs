@@ -5,18 +5,34 @@ using UnityEngine;
 public class PlayerShootSystem : MonoBehaviour
 {
     [SerializeField] private ProjectilePoolSystem _projectilePoolSystem;
+    public float shootInterval = 0.5f; 
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_projectilePoolSystem == null)
         {
-            var projectile = _projectilePoolSystem.GetComponent<ProjectilePoolSystem>();
+            Debug.LogError("ProjectilePoolSystem is not assigned.");
+        }
+        else
+        {
+            Debug.Log("ProjectilePoolSystem is assigned");
         }
 
+        // Commence à tirer continuellement
+        InvokeRepeating("ShootProjectile", 0f, shootInterval);
+    }
+
+    void ShootProjectile()
+    {
+        var projectile = _projectilePoolSystem.GetFirstProjectileAvailable();
+        if (projectile != null)
+        {
+            projectile.transform.position = transform.position;
+            Debug.Log("Projectile fired");
+        }
+        else
+        {
+            Debug.LogWarning("No projectile available in pool");
+        }
     }
 }

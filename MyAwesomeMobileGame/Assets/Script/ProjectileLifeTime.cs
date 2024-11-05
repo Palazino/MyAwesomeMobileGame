@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileLifeTime : MonoBehaviour
+public class ProjectileLifetime : MonoBehaviour
 {
-    [SerializeField] private float _lifeTime = 3f;
-    private float timer;
+    [SerializeField] private float _lifetime = 3f;
+    private float _timer;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > _lifeTime)
+        _timer = _timer + Time.deltaTime;
+        if (_timer > _lifetime)
         {
             gameObject.SetActive(false);
-
         }
+
+
     }
+
     private void OnEnable()
     {
-        timer = 0;
+        _timer = 0;
     }
 }
+;
