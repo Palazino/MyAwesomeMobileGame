@@ -1,0 +1,1 @@
+If you import into your project and see the materials in pink, simply open up the SRP folder and import the URP_Materials package if you have a Universal 3D project or import the HDRP_Upgrade package if you have a High Definition 3D project.

@@ -28,14 +28,8 @@ public class EnemyHealth : MonoBehaviour
         }
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(DieEffect()); // Lancer la coroutine de l'effet de mort
         }
-    }
-
-    void Die()
-    {
-        // Logique de destruction, animation, effets, etc.
-        Destroy(gameObject); // Détruire l'ennemi
     }
 
     IEnumerator FlashWhite()
@@ -44,5 +38,31 @@ public class EnemyHealth : MonoBehaviour
         meshRenderer.material.color = Color.white; // Changer la couleur en blanc
         yield return new WaitForSeconds(0.1f); // Attendre un court instant
         meshRenderer.material.color = originalColor; // Restaurer la couleur originale
+    }
+
+    IEnumerator DieEffect()
+    {
+        float duration = 0.5f; // Durée de l'effet
+        float timeElapsed = 0f;
+
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 1.5f; // Augmenter la taille de 50%
+
+        Color originalColor = meshRenderer.material.color;
+        Color targetColor = originalColor;
+        targetColor.a = 0f; // Rendre transparent
+
+        while (timeElapsed < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, timeElapsed / duration);
+            meshRenderer.material.color = Color.Lerp(originalColor, targetColor, timeElapsed / duration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+        meshRenderer.material.color = targetColor;
+
+        Destroy(gameObject); // Détruire l'ennemi après l'animation
     }
 }
