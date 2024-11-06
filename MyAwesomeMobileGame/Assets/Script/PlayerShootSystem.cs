@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerShootSystem : MonoBehaviour
 {
     [SerializeField] private ProjectilePoolSystem _projectilePoolSystem;
-    public float shootInterval = 0.5f; 
+    public float shootInterval = 0.5f;
+    private bool canShoot = false;
 
     void Start()
     {
@@ -18,8 +19,16 @@ public class PlayerShootSystem : MonoBehaviour
             Debug.Log("ProjectilePoolSystem is assigned");
         }
 
-        // Commence à tirer continuellement
-        InvokeRepeating("ShootProjectile", 0f, shootInterval);
+        // Commence à tirer continuellement mais seulement si canShoot est vrai
+        InvokeRepeating("TryShootProjectile", 0f, shootInterval);
+    }
+
+    void TryShootProjectile()
+    {
+        if (canShoot)
+        {
+            ShootProjectile();
+        }
     }
 
     void ShootProjectile()
@@ -34,5 +43,15 @@ public class PlayerShootSystem : MonoBehaviour
         {
             Debug.LogWarning("No projectile available in pool");
         }
+    }
+
+    public void EnableShooting()
+    {
+        canShoot = true;
+    }
+
+    public void DisableShooting()
+    {
+        canShoot = false;
     }
 }
