@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class SpiralMovement : MonoBehaviour
 {
-    public float speed = 1f; // Vitesse du mouvement
-    public float frequency = 1f; // Fréquence du mouvement en spirale
-    public float amplitude = 1f; // Amplitude du mouvement en spirale
+    public float speed = 1f; 
+    public float frequency = 1f; 
+    public float amplitude = 1f; 
     private Vector3 startPosition;
     private float timeOffset;
 
     void Start()
     {
-        startPosition = transform.position; // Enregistrer la position de départ
-        timeOffset = Random.Range(0f, 2 * Mathf.PI); // Générer un décalage aléatoire pour chaque ennemi
+        startPosition = transform.position; 
+        timeOffset = Random.Range(0f, 2 * Mathf.PI); 
     }
 
     void Update()

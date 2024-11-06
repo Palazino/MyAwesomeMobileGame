@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CubeBoundaries : MonoBehaviour
 {
-    public float minX = -5f; // Limite gauche
-    public float maxX = 5f;  // Limite droite
+    public float minX = -5f; 
+    public float maxX = 5f;  
     private float _playerYPosition;
 
     void Update()

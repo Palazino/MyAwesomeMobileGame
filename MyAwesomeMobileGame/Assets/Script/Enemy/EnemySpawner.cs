@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Le prefab de l'ennemi
-    public int rows = 3; // Nombre de lignes d'ennemis (ajusté)
-    public int columns = 5; // Nombre de colonnes d'ennemis (ajusté)
-    public float spacing = 1f; // Espace entre chaque ennemi (ajusté)
-    public float spawnHeight = 6f; // Hauteur de spawn au-dessus du joueur
-    public float playerZPosition = -5f; // Position Z fixe des ennemis
+    public GameObject enemyPrefab; 
+    public int rows = 3; 
+    public int columns = 5; 
+    public float spacing = 1f; 
+    public float spawnHeight = 6f; 
+    public float playerZPosition = -5f; 
 
     private Camera mainCamera;
 

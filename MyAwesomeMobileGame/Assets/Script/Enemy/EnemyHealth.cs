@@ -35,22 +35,22 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator FlashWhite()
     {
         Color originalColor = meshRenderer.material.color;
-        meshRenderer.material.color = Color.white; // Changer la couleur en blanc
-        yield return new WaitForSeconds(0.1f); // Attendre un court instant
-        meshRenderer.material.color = originalColor; // Restaurer la couleur originale
+        meshRenderer.material.color = Color.white; 
+        yield return new WaitForSeconds(0.1f); 
+        meshRenderer.material.color = originalColor; 
     }
 
     IEnumerator DieEffect()
     {
-        float duration = 0.5f; // Durée de l'effet
+        float duration = 0.5f; 
         float timeElapsed = 0f;
 
         Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = originalScale * 1.5f; // Augmenter la taille de 50%
+        Vector3 targetScale = originalScale * 1.5f; 
 
         Color originalColor = meshRenderer.material.color;
         Color targetColor = originalColor;
-        targetColor.a = 0f; // Rendre transparent
+        targetColor.a = 0f; 
 
         while (timeElapsed < duration)
         {
@@ -63,6 +63,6 @@ public class EnemyHealth : MonoBehaviour
         transform.localScale = targetScale;
         meshRenderer.material.color = targetColor;
 
-        Destroy(gameObject); // Détruire l'ennemi après l'animation
+        Destroy(gameObject); 
     }
 }
